@@ -24,6 +24,12 @@
     <ClCompile Include="Radar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fieldObstacles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fourierTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Environment.h">

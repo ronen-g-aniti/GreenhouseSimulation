@@ -108,6 +108,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,6 +129,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="fieldObstacles.cpp" />
+    <ClCompile Include="fourierTransform.cpp" />
     <ClCompile Include="GreenhouseSimulation.cpp" />
     <ClCompile Include="Radar.cpp" />
   </ItemGroup>

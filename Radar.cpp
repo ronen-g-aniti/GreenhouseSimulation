@@ -1,54 +1,61 @@
 #include "Radar.h"
+#include <vector>
+#include <iostream>
+#include <cmath> // For mathematical operations, if needed
+// Include other headers as necessary
 
-
-/*
-* Radar works be emitting EM waves (typically radio).
-* The EM waves hit targets.
-* The EM waves bounce back.
-* The bounced-back waves are called echoes.
-* Radar provides a depiction of the motion and existence of targets
-*  from the surrounding area, in this case, precipitation, terrain,
-*  airborne objects.
-* Radar & Weather: Radar echoes can clue us in to changes
-*  in weather phenomena since certain weather patterns
-*  are known to produce distinct radar signatures.
-*
-*/
-
-Radar::Radar() {
+Radar::Radar(float resolution) : resolution_(resolution) {
+    // Initialize radar with specified resolution
+    std::cout << "Radar initialized with " << resolution << " ft resolution." << std::endl;
 }
 
 Radar::~Radar() {
-	/*
-	* Learning note: Destructors in C++
-	* Destructors "clean up" resources
-	* For example, any radar echoes that are stored with
-	*  a Radar instance would be destroyed, freeing up
-	*  system resources
-	*/
+    // Radar destructor
 }
 
-// Method to emit radar pulses and receive echoes
+// Radar setup to define the scanning area
+void Radar::setupScanningArea(float width, float length, float height) {
+    scanningAreaWidth_ = width;
+    scanningAreaLength_ = length;
+    scanningAreaHeight_ = height;
+    std::cout << "Scanning area set: " << width << "x" << length << "x" << height << " ft." << std::endl;
+}
+
+// Simulate emitting radar pulses and receiving echoes from the UGV
 void Radar::emitAndReceivePulses() {
-	// Simulate emitting radar pulses and receiving echoes
-	// Update the echoes vector with received data
+    // Example: Simulate radar pulses over the scanning area and receive echoes
+    for (float x = 0.0; x < scanningAreaWidth_; x += resolution_) {
+        for (float y = 0.0; y < scanningAreaLength_; y += resolution_) {
+            for (float z = 0.0; z < scanningAreaHeight_; z += resolution_) {
+                // Placeholder for echo data collection
+                // In reality, you would check if this position intersects with UGV
+                // and calculate reflectivity based on that
+            }
+        }
+    }
 }
 
-// Method to process radar data
+// Process radar data to extract information about the UGV
 void Radar::processRadarData() {
-	// Implement signal processing algorithms to analyze radar data
-	// Extract information such as distance, velocity, and properties of targets
+    // Process collected radar echoes to identify UGV position, movement, etc.
+    // Placeholder for signal processing implementation
 }
 
-// Method to integrate radar data with greenhouse simulation
+// Integrate radar data with the greenhouse or external environment simulation
 void Radar::integrateWithSimulation() {
-	// Integrate radar data with other components of the simulation
-	// Update the state of the greenhouse based on radar observations
+    // Use radar data to update the simulation state
+    // e.g., detecting the UGV movement outside the greenhouse
 }
 
-// Method to display radar information
+// Display or log radar information for analysis
 void Radar::displayRadarInfo() {
-	// Display radar data or visualization of radar observations
+    // Visualize or log the processed radar data for debugging or analysis
 }
 
-// Add more methods as needed to configure radar parameters, access data, etc.
+// Method to set radar resolution dynamically
+void Radar::setResolution(float resolution) {
+    resolution_ = resolution;
+    std::cout << "Radar resolution set to " << resolution << " ft." << std::endl;
+}
+
+// Additional methods as necessary for radar configuration and data access
