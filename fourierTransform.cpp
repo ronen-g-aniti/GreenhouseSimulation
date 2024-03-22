@@ -1,9 +1,4 @@
-#include <cmath>
-#include <vector>
-#include <complex>
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <fstream>
+#include "fourierTransform.h"
 
 
 std::vector<double> generateSineWave(double frequency, double amplitude, int numSamples) {
@@ -17,20 +12,21 @@ std::vector<double> generateSineWave(double frequency, double amplitude, int num
 }
 
 std::vector<std::complex<double>> dft(const std::vector<double>& signal) {
-	int N = signal.size();
-	std::vector<std::complex<double>> result(N);
-	for (int k = 0; k < N; ++k) {
-		std::complex<double> sum(0.0, 0.0);
-		for (int n = 0; n < N; ++n) {
-			double angle = 2 * M_PI * k * n / N;
-			std::complex<double> exp_term(cos(angle), sin(angle));
-			sum += signal[n] * exp_term;
+    int N = signal.size();
+    std::vector<std::complex<double>> result(N);
 
-		}
-		result[k] = sum;
-	}
-	return result;
+    for (int k = 0; k < N; ++k) {
+        std::complex<double> sum(0.0, 0.0);
+        for (int n = 0; n < N; ++n) {
+            double angle = -2.0 * M_PI * k * n / N;
+            std::complex<double> exp_term(std::cos(angle), std::sin(angle));
+            sum += signal[n] * exp_term;
+        }
+        result[k] = sum / static_cast<double>(N); // Apply normalization
+    }
+    return result;
 }
+
 
 void writeDFTToFile(const std::vector<std::complex<double>>& dftResult, const std::string& filename) {
 	std::ofstream file(filename);
@@ -38,7 +34,6 @@ void writeDFTToFile(const std::vector<std::complex<double>>& dftResult, const st
 		file << value.real() << "," << value.imag() << std::endl;
 	}
 	file.close();
-
 }
 
 
