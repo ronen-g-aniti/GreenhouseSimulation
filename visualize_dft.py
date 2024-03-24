@@ -36,3 +36,27 @@ plt.ylabel('Phase (radians)')
 
 plt.tight_layout()
 plt.show()
+
+# Load data from CSV for time-domain signal
+# Assuming the CSV has two columns: time and amplitude
+with open('timeDomainSignal.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
+    next(csvreader)  # Skip the header row
+    time = []
+    amplitude = []
+    for row in csvreader:
+        time.append(float(row[0]))
+        amplitude.append(float(row[1]))
+
+time = np.array(time)
+amplitude = np.array(amplitude)
+
+# Plotting the time-domain signal
+plt.figure(figsize=(12, 6))
+plt.plot(time, amplitude, label='Time-Domain Signal')
+plt.title('Radar Signal in Time Domain')
+plt.xlabel('Time (seconds)')
+plt.ylabel('Amplitude')
+plt.legend()
+plt.grid(True)
+plt.show()

@@ -132,6 +132,7 @@
     <ClCompile Include="fieldObstacles.cpp" />
     <ClCompile Include="fourierTransform.cpp" />
     <ClCompile Include="GreenhouseSimulation.cpp" />
+    <ClCompile Include="pathfinding.cpp" />
     <ClCompile Include="Radar.cpp" />
   </ItemGroup>
   <ItemGroup>

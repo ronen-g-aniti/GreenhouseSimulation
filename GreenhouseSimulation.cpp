@@ -14,25 +14,20 @@ int main()
 	env.updateConditions(2.0, -5.0);
 	env.reportStatus();
 
-    double frequency1 = 10.0; // Frequency of the sine wave in Hz
-    double amplitude1 = 5.0; // Amplitude of the sine wave
-    int numSamples1 = 1000; // Number of samples in the signal
+    double fc = 1000.0; // Carrier frequency in Hz
+    double pw = 0.01; // Pulse width in seconds
+    double pri = 0.1; // Pulse repetition interval in seconds
+    double amplitude = 1.0; // Amplitude of the signal
+    int n_pulses = 10; // Number of pulses
+    double fs = 5000.0; // Sampling rate in Hz
 
-    std::vector<double> signal1 = generateSineWave(frequency1, amplitude1, numSamples1);
+    std::vector<double> radarSignal = generateRadarSignal(fc, pw, pri, amplitude, n_pulses, fs);
     
-    double frequency2 = 40.0; // Frequency of the sine wave in Hz
-    double amplitude2 = 5.0; // Amplitude of the sine wave
-    int numSamples2 = 1000; // Number of samples in the signal
+    // Write radar signal to CSV
+    writeTimeDomainSignalToCSV(radarSignal, "timeDomainSignal.csv", fs);
 
-    std::vector<double> signal2 = generateSineWave(frequency2, amplitude2, numSamples2);
-
-    std::vector<double> signal(numSamples1);
-    for (int i = 0; i < numSamples1; ++i) {
-        signal[i] = signal1[i] + signal2[i];
-    }
-
-    std::vector<std::complex<double>> dftResult = dft(signal);
-
+    // Now you can analyze the radar signal using the DFT to understand its frequency components
+    std::vector<std::complex<double>> dftResult = dft(radarSignal);
     writeDFTToFile(dftResult, "dftResults.csv");
 
     return 0;
